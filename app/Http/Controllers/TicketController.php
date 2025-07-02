@@ -88,15 +88,15 @@ class TicketController extends Controller
         return view('admin.tickets.index', compact('tickets'));
     }
 
-    public function adminShow(Ticket $ticket)
+    public function adminEdit(Ticket $ticket)
     {
-        return response()->json($ticket);
+        return view('admin.tickets.edit', compact('ticket'));
     }
 
     public function adminUpdate(Request $request, Ticket $ticket)
     {
         $validated = $request->validate([
-            'status' => 'required|in:pending,in_progress,completed',
+            'status' => 'required|in:pending,progress,completed',
             'response' => 'nullable|string'
         ]);
 
@@ -125,7 +125,7 @@ class TicketController extends Controller
             if ($ticket->image_path) {
                 Storage::disk('public')->delete($ticket->image_path);
             }
-            
+
             $ticket->delete();
             return redirect()->route('admin.tickets.index')
                 ->with('success', 'Tiket berhasil dihapus');
@@ -151,7 +151,7 @@ class TicketController extends Controller
         }
 
         $tickets = $query->latest()->paginate(10);
-        
+
         if ($request->ajax()) {
             return response()->json([
                 'html' => view('admin.tickets._table', compact('tickets'))->render(),
@@ -165,17 +165,17 @@ class TicketController extends Controller
     public function export()
     {
         $tickets = Ticket::all();
-        
+
         $spreadsheet = new \PhpOffice\PhpSpreadsheet\Spreadsheet();
         $sheet = $spreadsheet->getActiveSheet();
-        
+
         // Headers
         $sheet->setCellValue('A1', 'No.');
         $sheet->setCellValue('B1', 'Unit');
         $sheet->setCellValue('C1', 'Deskripsi');
         $sheet->setCellValue('D1', 'Status');
         $sheet->setCellValue('E1', 'Tanggal Dibuat');
-        
+
         // Data
         $row = 2;
         foreach ($tickets as $index => $ticket) {
@@ -186,26 +186,26 @@ class TicketController extends Controller
             $sheet->setCellValue('E' . $row, $ticket->created_at->format('d/m/Y H:i'));
             $row++;
         }
-        
+
         // Auto-size columns
         foreach (range('A', 'E') as $column) {
             $sheet->getColumnDimension($column)->setAutoSize(true);
         }
-        
+
         $writer = new \PhpOffice\PhpSpreadsheet\Writer\Xlsx($spreadsheet);
-        
+
         $filename = 'tickets-' . date('Y-m-d') . '.xlsx';
         header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
         header('Content-Disposition: attachment;filename="' . $filename . '"');
         header('Cache-Control: max-age=0');
-        
+
         $writer->save('php://output');
     }
 
     public function updateStatus(Request $request, Ticket $ticket)
     {
         $validated = $request->validate([
-            'status' => 'required|in:pending,in_progress,completed,cancelled'
+            'status' => 'required|in:pending,progress,completed,cancelled'
         ]);
 
         $ticket->update($validated);
@@ -218,9 +218,9 @@ class TicketController extends Controller
         if ($ticket->image_path) {
             Storage::disk('public')->delete($ticket->image_path);
         }
-        
+
         $ticket->delete();
-        
-        return response()->json(['success' => true]);
+
+        return redirect()->back();
     }
-} 
+}

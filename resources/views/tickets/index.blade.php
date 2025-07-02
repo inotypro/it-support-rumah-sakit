@@ -73,11 +73,11 @@
                                                         <td>{{ $ticket->unit }}</td>
                                                         <td>{{ Str::limit($ticket->description, 50) }}</td>
                                                         <td>
-                                                            <span class="badge bg-{{ $ticket->status == 'pending' ? 'warning' : 
-                                                                                    ($ticket->status == 'in_progress' ? 'info' : 
+                                                            <span class="badge bg-{{ $ticket->status == 'pending' ? 'warning' :
+                                                                                    ($ticket->status == 'progress' ? 'info' :
                                                                                     ($ticket->status == 'completed' ? 'success' : 'secondary')) }}">
-                                                                {{ $ticket->status == 'pending' ? 'Pending' : 
-                                                                   ($ticket->status == 'in_progress' ? 'Dalam Proses' : 
+                                                                {{ $ticket->status == 'pending' ? 'Pending' :
+                                                                   ($ticket->status == 'progress' ? 'Dalam Proses' :
                                                                    ($ticket->status == 'completed' ? 'Selesai' : 'Dibatalkan')) }}
                                                             </span>
                                                         </td>
@@ -143,4 +143,4 @@
     font-weight: 500;
 }
 </style>
-@endsection 
+@endsection

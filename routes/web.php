@@ -78,6 +78,7 @@ Route::prefix('admin')->name('admin.')->middleware(['auth'])->group(function () 
             Route::get('/', [TicketController::class, 'adminIndex'])->name('index');
             Route::get('/search', [TicketController::class, 'adminSearch'])->name('search');
             Route::get('/{ticket}', [TicketController::class, 'adminShow'])->name('show');
+            Route::get('/{ticket}/edit', [TicketController::class, 'adminEdit'])->name('edit');
             Route::put('/{ticket}', [TicketController::class, 'adminUpdate'])->name('update');
             Route::delete('/{ticket}', [TicketController::class, 'adminDestroy'])->name('destroy');
             Route::put('/{ticket}/status', [TicketController::class, 'updateStatus'])->name('status.update');

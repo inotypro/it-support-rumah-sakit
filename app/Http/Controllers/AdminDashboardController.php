@@ -36,10 +36,10 @@ class AdminDashboardController extends Controller
         if (Auth::user()->role === 'superadmin' || Auth::user()->role === 'admin_pendaftaran') {
             $data['totalTickets'] = Ticket::count();
             $data['pendingTickets'] = Ticket::where('status', 'pending')->count();
-            $data['inProgressTickets'] = Ticket::where('status', 'in_progress')->count();
+            $data['inProgressTickets'] = Ticket::where('status', 'progress')->count();
             $data['completedTickets'] = Ticket::where('status', 'completed')->count();
             $data['recentTickets'] = Ticket::latest()->take(5)->get();
-            
+
             $data['totalRegistrations'] = Registration::count();
             $data['pendingRegistrations'] = Registration::where('status', 'proses')->count();
             $data['processingRegistrations'] = Registration::where('status', 'selesai')->count();
@@ -49,7 +49,7 @@ class AdminDashboardController extends Controller
         // Data khusus superadmin
         if (Auth::user()->role === 'superadmin') {
             $data['totalSurveys'] = Survey::count();
-            
+
             // Calculate average ratings
             if ($data['totalSurveys'] > 0) {
                 $data['averageRatings'] = [
@@ -249,4 +249,4 @@ class AdminDashboardController extends Controller
             return back()->with('error', 'Terjadi kesalahan saat memverifikasi pendaftaran');
         }
     }
-} 
+}

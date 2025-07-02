@@ -16,7 +16,8 @@ return new class extends Migration
             $table->string('phone');
             $table->text('description');
             $table->string('image_path')->nullable();
-            $table->enum('status', ['pending', 'in_progress', 'completed', 'cancelled'])->default('pending');
+            $table->text('response')->nullable();
+            $table->enum('status', ['pending', 'progress', 'completed', 'cancelled'])->default('pending');
             $table->timestamps();
         });
     }
@@ -25,4 +26,4 @@ return new class extends Migration
     {
         Schema::dropIfExists('tickets');
     }
-}; 
+};

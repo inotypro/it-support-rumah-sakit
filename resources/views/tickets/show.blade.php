@@ -25,12 +25,12 @@
                                     </div>
                                     <div>
                                         <h4 class="mb-0">Detail Tiket #{{ $ticket->ticket_number }}</h4>
-                                        <p class="mb-0">Status: 
-                                            <span class="badge bg-{{ $ticket->status == 'pending' ? 'warning' : 
-                                                                    ($ticket->status == 'in_progress' ? 'info' : 
+                                        <p class="mb-0">Status:
+                                            <span class="badge bg-{{ $ticket->status == 'pending' ? 'warning' :
+                                                                    ($ticket->status == 'progress' ? 'info' :
                                                                     ($ticket->status == 'completed' ? 'success' : 'secondary')) }}">
-                                                {{ $ticket->status == 'pending' ? 'Pending' : 
-                                                   ($ticket->status == 'in_progress' ? 'Dalam Proses' : 
+                                                {{ $ticket->status == 'pending' ? 'Pending' :
+                                                   ($ticket->status == 'progress' ? 'Dalam Proses' :
                                                    ($ticket->status == 'completed' ? 'Selesai' : 'Dibatalkan')) }}
                                             </span>
                                         </p>
@@ -107,4 +107,4 @@
     justify-content: center;
 }
 </style>
-@endsection 
+@endsection

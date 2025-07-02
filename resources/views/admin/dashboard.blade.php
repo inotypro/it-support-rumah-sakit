@@ -96,7 +96,7 @@
                                     <td>{{ number_format($averageRatings['pelayanan_medis'], 1) }}/5.0</td>
                                     <td>
                                         <div class="progress">
-                                            <div class="progress-bar bg-success" role="progressbar" 
+                                            <div class="progress-bar bg-success" role="progressbar"
                                                 style="width: {{ ($averageRatings['pelayanan_medis']/5)*100 }}%">
                                             </div>
                                         </div>
@@ -107,19 +107,37 @@
                                     <td>{{ number_format($averageRatings['fasilitas'], 1) }}/5.0</td>
                                     <td>
                                         <div class="progress">
-                                            <div class="progress-bar bg-info" role="progressbar" 
+                                            <div class="progress-bar bg-info" role="progressbar"
                                                 style="width: {{ ($averageRatings['fasilitas']/5)*100 }}%">
                                             </div>
                                         </div>
                                     </td>
                                 </tr>
                                 <tr>
+                                    <td>Kebersihan</td>
+                                    <td>{{ number_format($averageRatings['kebersihan'], 1) }}/5.0</td>
+                                    <td>
+                                        <div class="progress">
+                                            <div class="progress-bar bg-primary" role="progressbar"
+                                                style="width: {{ ($averageRatings['kebersihan']/5)*100 }}%">
+                                <tr>
                                     <td>Kecepatan Pelayanan</td>
                                     <td>{{ number_format($averageRatings['kecepatan_pelayanan'], 1) }}/5.0</td>
                                     <td>
                                         <div class="progress">
-                                            <div class="progress-bar bg-warning" role="progressbar" 
+                                            <div class="progress-bar bg-warning" role="progressbar"
                                                 style="width: {{ ($averageRatings['kecepatan_pelayanan']/5)*100 }}%">
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Keramahan Staff</td>
+                                    <td>{{ number_format($averageRatings['keramahan_staff'], 1) }}/5.0</td>
+                                    <td>
+                                        <div class="progress">
+                                            <div class="progress-bar bg-danger" role="progressbar"
+                                                style="width: {{ ($averageRatings['keramahan_staff']/5)*100 }}%">
                                             </div>
                                         </div>
                                     </td>
@@ -148,7 +166,7 @@
                             <thead>
                                 <tr>
                                     <th>No. Tiket</th>
-                                    <th>Subjek</th>
+                                    <th>Unit</th>
                                     <th>Status</th>
                                     <th>Tanggal</th>
                                 </tr>
@@ -157,9 +175,9 @@
                                 @foreach($recentTickets as $ticket)
                                 <tr>
                                     <td>{{ $ticket->ticket_number }}</td>
-                                    <td>{{ Str::limit($ticket->subject, 30) }}</td>
+                                    <td>{{ Str::limit($ticket->unit, 10) }}</td>
                                     <td>
-                                        <span class="badge bg-{{ $ticket->status == 'open' ? 'warning' : ($ticket->status == 'in_progress' ? 'info' : 'success') }}">
+                                        <span class="badge bg-{{ $ticket->status == 'open' ? 'warning' : ($ticket->status == 'progress' ? 'info' : 'success') }}">
                                             {{ ucfirst(str_replace('_', ' ', $ticket->status)) }}
                                         </span>
                                     </td>
@@ -177,4 +195,4 @@
         </div>
     </div>
 </div>
-@endsection 
+@endsection
