@@ -50,16 +50,29 @@ class AdminDashboardController extends Controller
         if (Auth::user()->role === 'superadmin') {
             $data['totalSurveys'] = Survey::count();
 
-            // Calculate average ratings
-            if ($data['totalSurveys'] > 0) {
-                $data['averageRatings'] = [
-                    'pelayanan_medis' => Survey::avg('pelayanan_medis_rating') ?? 0,
-                    'fasilitas' => Survey::avg('fasilitas_rating') ?? 0,
-                    'kebersihan' => Survey::avg('kebersihan_rating') ?? 0,
-                    'kecepatan_pelayanan' => Survey::avg('kecepatan_pelayanan_rating') ?? 0,
-                    'keramahan_staff' => Survey::avg('keramahan_staff_rating') ?? 0
-                ];
+            // Ambil input filter
+            $month = request('month');
+            $startDate = request('start_date');
+            $endDate = request('end_date');
+
+            // Query data survey
+            $surveyQuery = Survey::query();
+
+            if ($month) {
+                $surveyQuery->whereYear('created_at', substr($month, 0, 4))
+                            ->whereMonth('created_at', substr($month, 5, 2));
             }
+
+            // Hitung rata-rata rating
+            $averageRatings = [
+                'pelayanan_medis' => $surveyQuery->avg('pelayanan_medis_rating'),
+                'fasilitas' => $surveyQuery->avg('fasilitas_rating'),
+                'kebersihan' => $surveyQuery->avg('kebersihan_rating'),
+                'kecepatan_pelayanan' => $surveyQuery->avg('kecepatan_pelayanan_rating'),
+                'keramahan_staff' => $surveyQuery->avg('keramahan_staff_rating'),
+            ];
+
+            $data['averageRatings'] = $averageRatings;
         }
 
         return view('admin.dashboard', $data);

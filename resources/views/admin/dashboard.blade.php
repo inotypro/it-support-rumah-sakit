@@ -80,6 +80,16 @@
                     Hasil Survey Kepuasan
                 </div>
                 <div class="card-body">
+                    <form method="GET" action="{{ route('admin.dashboard') }}" class="row g-3 mb-3">
+                        <div class="col-auto">
+                            <label for="month" class="form-label mb-0">Bulan</label>
+                            <input type="month" class="form-control" id="month" name="month" value="{{ request('month') }}">
+                        </div>
+                        <div class="col-auto align-self-end">
+                            <button type="submit" class="btn btn-primary">Filter</button>
+                            <a href="{{ route('admin.dashboard') }}" class="btn btn-secondary">Reset</a>
+                        </div>
+                    </form>
                     @if(isset($averageRatings))
                     <div class="table-responsive">
                         <table class="table">
