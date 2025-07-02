@@ -27,7 +27,6 @@ class Registration extends Model
         'poly',
         'status',
         'patient_type',
-        'is_verified'
     ];
 
     protected $attributes = [
@@ -112,4 +111,4 @@ class Registration extends Model
             default => '<span class="badge bg-secondary">Unknown</span>'
         };
     }
-} 
+}

@@ -126,21 +126,21 @@
                                     <td>
                                         <div class="btn-group">
                                             <!-- Tombol Lihat Detail -->
-                                            <a href="{{ route('admin.registrations.show', $registration) }}" 
-                                               class="btn btn-sm btn-primary" 
+                                            <a href="{{ route('admin.registrations.show', $registration) }}"
+                                               class="btn btn-sm btn-primary"
                                                title="Lihat Detail">
                                                 <i class="fas fa-eye"></i>
                                             </a>
 
                                             <!-- Tombol Hapus -->
-                                            <form action="{{ route('admin.registrations.destroy', $registration) }}" 
-                                                  method="POST" 
+                                            <form action="{{ route('admin.registrations.destroy', $registration) }}"
+                                                  method="POST"
                                                   class="d-inline">
                                                 @csrf
                                                 @method('DELETE')
-                                                <button type="submit" 
-                                                        class="btn btn-sm btn-danger" 
-                                                        onclick="return confirm('Apakah Anda yakin ingin menghapus data ini?')" 
+                                                <button type="submit"
+                                                        class="btn btn-sm btn-danger"
+                                                        onclick="return confirm('Apakah Anda yakin ingin menghapus data ini?')"
                                                         title="Hapus">
                                                     <i class="fas fa-trash"></i>
                                                 </button>
@@ -220,4 +220,4 @@
 @push('scripts')
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 @endpush
-@endsection 
+@endsection

@@ -132,7 +132,7 @@ class RegistrationController extends Controller
         return view('admin.registrations.index', compact('registrations'));
     }
 
-    // Detail pendaftaran
+    // Tampilkan detail pendaftaran untuk admin
     public function show(Registration $registration)
     {
         return view('admin.registrations.show', compact('registration'));
@@ -230,7 +230,7 @@ class RegistrationController extends Controller
         }
 
         $registrations = $query->latest()->paginate(10);
-        
+
         if ($request->ajax()) {
             return response()->json([
                 'html' => view('admin.registrations._table', compact('registrations'))->render(),
@@ -240,4 +240,10 @@ class RegistrationController extends Controller
 
         return view('admin.registrations.index', compact('registrations'));
     }
-} 
+
+    // Tampilkan form edit pendaftaran untuk admin
+    public function edit(Registration $registration)
+    {
+        return view('admin.registrations.edit', compact('registration'));
+    }
+}

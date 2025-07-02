@@ -10,7 +10,7 @@ return new class extends Migration
     {
         Schema::create('registrations', function (Blueprint $table) {
             $table->id();
-            $table->string('medical_record_number')->nullable()->unique();
+            $table->string('medical_record_number')->nullable();
             $table->string('full_name');
             $table->string('nik', 16)->nullable()->unique();
             $table->string('gender');
@@ -25,7 +25,6 @@ return new class extends Migration
             $table->string('poly');
             $table->enum('status', ['proses', 'selesai', 'batal'])->default('proses');
             $table->enum('patient_type', ['baru', 'lama'])->default('baru');
-            $table->boolean('is_verified')->default(false);
             $table->timestamps();
         });
     }
@@ -34,4 +33,4 @@ return new class extends Migration
     {
         Schema::dropIfExists('registrations');
     }
-}; 
+};

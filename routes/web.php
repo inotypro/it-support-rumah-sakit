@@ -67,6 +67,7 @@ Route::prefix('admin')->name('admin.')->middleware(['auth'])->group(function () 
             Route::get('/', [RegistrationController::class, 'adminIndex'])->name('index');
             Route::get('/search', [RegistrationController::class, 'adminSearch'])->name('search');
             Route::get('/{registration}', [RegistrationController::class, 'show'])->name('show');
+            Route::get('/{registration}/edit', [RegistrationController::class, 'edit'])->name('edit');
             Route::put('/{registration}', [RegistrationController::class, 'adminUpdate'])->name('update');
             Route::delete('/{registration}', [RegistrationController::class, 'adminDestroy'])->name('destroy');
             Route::put('/{registration}/status', [RegistrationController::class, 'updateStatus'])->name('update-status');
