@@ -18,6 +18,8 @@ class SurveysExport implements FromCollection, WithHeadings, WithMapping
     {
         return [
             'ID',
+            'Nama',
+            'No. HP',
             'Pelayanan Medis',
             'Fasilitas',
             'Kebersihan',
@@ -33,6 +35,8 @@ class SurveysExport implements FromCollection, WithHeadings, WithMapping
     {
         return [
             $survey->id,
+            $survey->name,
+            $survey->phone_number,
             $survey->pelayanan_medis_rating,
             $survey->fasilitas_rating,
             $survey->kebersihan_rating,
@@ -43,4 +47,4 @@ class SurveysExport implements FromCollection, WithHeadings, WithMapping
             $survey->updated_at->format('d/m/Y H:i:s')
         ];
     }
-} 
+}

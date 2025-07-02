@@ -10,6 +10,8 @@ class Survey extends Model
     use HasFactory;
 
     protected $fillable = [
+        'name',
+        'phone_number',
         'pelayanan_medis_rating',
         'fasilitas_rating',
         'kebersihan_rating',
@@ -32,4 +34,4 @@ class Survey extends Model
     {
         return $this->belongsTo(User::class);
     }
-} 
+}

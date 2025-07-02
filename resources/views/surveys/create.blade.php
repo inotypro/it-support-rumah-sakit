@@ -17,7 +17,23 @@
 
                     <form action="{{ route('surveys.store') }}" method="POST">
                         @csrf
-                        
+
+                        <div class="mb-4">
+                            <label for="name" class="form-label">Nama Lengkap</label>
+                            <input type="text" class="form-control @error('name') is-invalid @enderror" id="name" name="name" value="{{ old('name') }}" required>
+                            @error('name')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
+                        </div>
+
+                        <div class="mb-4">
+                            <label for="phone_number" class="form-label">Nomor HP</label>
+                            <input type="tel" class="form-control @error('phone_number') is-invalid @enderror" id="phone_number" name="phone_number" value="{{ old('phone_number') }}" required>
+                            @error('phone_number')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
+                        </div>
+
                         <div class="mb-4">
                             <label class="form-label">Pelayanan Medis</label>
                             <div class="rating-stars">
@@ -131,4 +147,4 @@
     border-color: #ffc107;
 }
 </style>
-@endsection 
+@endsection

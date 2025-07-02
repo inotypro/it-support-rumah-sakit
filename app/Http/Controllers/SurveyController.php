@@ -24,7 +24,7 @@ class SurveyController extends Controller
             'kecepatan_pelayanan' => Survey::avg('kecepatan_pelayanan_rating'),
             'keramahan_staff' => Survey::avg('keramahan_staff_rating'),
         ];
-        
+
         return view('admin.surveys.index', compact('surveys', 'averageRatings'));
     }
 
@@ -33,15 +33,27 @@ class SurveyController extends Controller
         $query = Survey::latest();
 
         if ($request->search) {
-            $query->where('name', 'like', '%' . $request->search . '%');
+            $query->where('name', 'like', '%' . $request->search . '%')
+                  ->orWhere('phone_number', 'like', '%' . $request->search . '%');
         }
 
         if ($request->rating) {
-            $query->where('rating', $request->rating);
+            // Calculate average rating for filtering
+            $query->whereRaw('(pelayanan_medis_rating + fasilitas_rating + kebersihan_rating + kecepatan_pelayanan_rating + keramahan_staff_rating) / 5 >= ?', [$request->rating]);
         }
 
         $surveys = $query->paginate(10);
-        return view('admin.surveys.index', compact('surveys'));
+
+        // Calculate average ratings for display
+        $averageRatings = [
+            'pelayanan_medis' => Survey::avg('pelayanan_medis_rating'),
+            'fasilitas' => Survey::avg('fasilitas_rating'),
+            'kebersihan' => Survey::avg('kebersihan_rating'),
+            'kecepatan_pelayanan' => Survey::avg('kecepatan_pelayanan_rating'),
+            'keramahan_staff' => Survey::avg('keramahan_staff_rating'),
+        ];
+
+        return view('admin.surveys.index', compact('surveys', 'averageRatings'));
     }
 
     public function adminShow(Survey $survey)
@@ -68,6 +80,8 @@ class SurveyController extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate([
+            'name' => 'required|string|max:255',
+            'phone_number' => 'required|string|max:20',
             'pelayanan_medis' => 'required|integer|min:1|max:5',
             'fasilitas' => 'required|integer|min:1|max:5',
             'kebersihan' => 'required|integer|min:1|max:5',
@@ -78,6 +92,8 @@ class SurveyController extends Controller
 
         // Map the form field names to database column names
         $survey = new Survey();
+        $survey->name = $validated['name'];
+        $survey->phone_number = $validated['phone_number'];
         $survey->pelayanan_medis_rating = $validated['pelayanan_medis'];
         $survey->fasilitas_rating = $validated['fasilitas'];
         $survey->kebersihan_rating = $validated['kebersihan'];
@@ -94,4 +110,4 @@ class SurveyController extends Controller
     {
         return view('surveys.success');
     }
-} 
+}

@@ -14,7 +14,7 @@
         <form action="{{ route('admin.surveys.search') }}" method="GET" class="mb-4">
             <div class="row g-3">
                 <div class="col-md-4">
-                    <input type="text" name="search" class="form-control" placeholder="Cari berdasarkan nama..." 
+                    <input type="text" name="search" class="form-control" placeholder="Cari berdasarkan nama..."
                            value="{{ request('search') }}">
                 </div>
                 <div class="col-md-3">
@@ -41,8 +41,9 @@
                     <tr>
                         <th>No.</th>
                         <th>Nama</th>
-                        <th>Rating</th>
-                        <th>Komentar</th>
+                        <th>No. HP</th>
+                        <th>Rating Rata-rata</th>
+                        <th>Saran</th>
                         <th>Tanggal</th>
                         <th>Aksi</th>
                     </tr>
@@ -52,16 +53,21 @@
                         <tr>
                             <td>{{ $surveys->firstItem() + $index }}</td>
                             <td>{{ $survey->name }}</td>
+                            <td>{{ $survey->phone_number }}</td>
                             <td>
+                                @php
+                                    $avgRating = ($survey->pelayanan_medis_rating + $survey->fasilitas_rating + $survey->kebersihan_rating + $survey->kecepatan_pelayanan_rating + $survey->keramahan_staff_rating) / 5;
+                                @endphp
                                 @for($i = 1; $i <= 5; $i++)
-                                    <i class="fas fa-star {{ $i <= $survey->rating ? 'text-warning' : 'text-secondary' }}"></i>
+                                    <i class="fas fa-star {{ $i <= $avgRating ? 'text-warning' : 'text-secondary' }}"></i>
                                 @endfor
+                                <span class="ms-1">({{ number_format($avgRating, 1) }})</span>
                             </td>
-                            <td>{{ Str::limit($survey->comment, 50) }}</td>
+                            <td>{{ Str::limit($survey->saran, 50) }}</td>
                             <td>{{ $survey->created_at->format('d/m/Y H:i') }}</td>
                             <td>
                                 <div class="btn-group">
-                                    <button type="button" class="btn btn-sm btn-info" data-bs-toggle="modal" 
+                                    <button type="button" class="btn btn-sm btn-info" data-bs-toggle="modal"
                                             data-bs-target="#detailModal{{ $survey->id }}">
                                         <i class="fas fa-eye"></i>
                                     </button>
@@ -89,15 +95,51 @@
                                             <dt class="col-sm-4">Nama</dt>
                                             <dd class="col-sm-8">{{ $survey->name }}</dd>
 
-                                            <dt class="col-sm-4">Rating</dt>
+                                            <dt class="col-sm-4">No. HP</dt>
+                                            <dd class="col-sm-8">{{ $survey->phone_number }}</dd>
+
+                                            <dt class="col-sm-4">Pelayanan Medis</dt>
                                             <dd class="col-sm-8">
                                                 @for($i = 1; $i <= 5; $i++)
-                                                    <i class="fas fa-star {{ $i <= $survey->rating ? 'text-warning' : 'text-secondary' }}"></i>
+                                                    <i class="fas fa-star {{ $i <= $survey->pelayanan_medis_rating ? 'text-warning' : 'text-secondary' }}"></i>
                                                 @endfor
+                                                ({{ $survey->pelayanan_medis_rating }}/5)
                                             </dd>
 
-                                            <dt class="col-sm-4">Komentar</dt>
-                                            <dd class="col-sm-8">{{ $survey->comment }}</dd>
+                                            <dt class="col-sm-4">Fasilitas</dt>
+                                            <dd class="col-sm-8">
+                                                @for($i = 1; $i <= 5; $i++)
+                                                    <i class="fas fa-star {{ $i <= $survey->fasilitas_rating ? 'text-warning' : 'text-secondary' }}"></i>
+                                                @endfor
+                                                ({{ $survey->fasilitas_rating }}/5)
+                                            </dd>
+
+                                            <dt class="col-sm-4">Kebersihan</dt>
+                                            <dd class="col-sm-8">
+                                                @for($i = 1; $i <= 5; $i++)
+                                                    <i class="fas fa-star {{ $i <= $survey->kebersihan_rating ? 'text-warning' : 'text-secondary' }}"></i>
+                                                @endfor
+                                                ({{ $survey->kebersihan_rating }}/5)
+                                            </dd>
+
+                                            <dt class="col-sm-4">Kecepatan Pelayanan</dt>
+                                            <dd class="col-sm-8">
+                                                @for($i = 1; $i <= 5; $i++)
+                                                    <i class="fas fa-star {{ $i <= $survey->kecepatan_pelayanan_rating ? 'text-warning' : 'text-secondary' }}"></i>
+                                                @endfor
+                                                ({{ $survey->kecepatan_pelayanan_rating }}/5)
+                                            </dd>
+
+                                            <dt class="col-sm-4">Keramahan Staff</dt>
+                                            <dd class="col-sm-8">
+                                                @for($i = 1; $i <= 5; $i++)
+                                                    <i class="fas fa-star {{ $i <= $survey->keramahan_staff_rating ? 'text-warning' : 'text-secondary' }}"></i>
+                                                @endfor
+                                                ({{ $survey->keramahan_staff_rating }}/5)
+                                            </dd>
+
+                                            <dt class="col-sm-4">Saran</dt>
+                                            <dd class="col-sm-8">{{ $survey->saran ?: 'Tidak ada saran' }}</dd>
 
                                             <dt class="col-sm-4">Tanggal</dt>
                                             <dd class="col-sm-8">{{ $survey->created_at->format('d/m/Y H:i') }}</dd>
@@ -108,7 +150,7 @@
                         </div>
                     @empty
                         <tr>
-                            <td colspan="6" class="text-center">Tidak ada data survey.</td>
+                            <td colspan="7" class="text-center">Tidak ada data survey.</td>
                         </tr>
                     @endforelse
                 </tbody>
@@ -120,4 +162,4 @@
         </div>
     </div>
 </div>
-@endsection 
+@endsection

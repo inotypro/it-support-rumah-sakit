@@ -20,8 +20,8 @@
                                     <td>{{ $survey->name }}</td>
                                 </tr>
                                 <tr>
-                                    <th>Email</th>
-                                    <td>{{ $survey->email }}</td>
+                                    <th>No. HP</th>
+                                    <td>{{ $survey->phone_number }}</td>
                                 </tr>
                                 <tr>
                                     <th>Tanggal Submit</th>
@@ -63,11 +63,11 @@
                                         </div>
                                     </div>
                                     <div class="progress mt-2" style="height: 5px;">
-                                        <div class="progress-bar {{ $rating >= 4 ? 'bg-success' : ($rating >= 3 ? 'bg-warning' : 'bg-danger') }}" 
-                                             role="progressbar" 
-                                             style="width: {{ ($rating/5)*100 }}%" 
-                                             aria-valuenow="{{ $rating }}" 
-                                             aria-valuemin="0" 
+                                        <div class="progress-bar {{ $rating >= 4 ? 'bg-success' : ($rating >= 3 ? 'bg-warning' : 'bg-danger') }}"
+                                             role="progressbar"
+                                             style="width: {{ ($rating/5)*100 }}%"
+                                             aria-valuenow="{{ $rating }}"
+                                             aria-valuemin="0"
                                              aria-valuemax="5">
                                         </div>
                                     </div>
@@ -96,4 +96,4 @@
         </div>
     </div>
 </div>
-@endsection 
+@endsection
