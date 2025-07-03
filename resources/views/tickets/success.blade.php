@@ -23,7 +23,7 @@
                                 <h3 class="card-title">Tiket Berhasil Dibuat!</h3>
                                 <p class="card-text">Tim IT Support kami akan segera menindaklanjuti tiket Anda.</p>
                                 <div class="mt-4">
-                                    <a href="{{ route('welcome') }}" class="btn btn-primary">Kembali ke Beranda</a>
+                                    <a href="{{ route('requesttiket') }}" class="btn btn-primary">Kembali ke Beranda</a>
                                     <a href="{{ route('tickets.create') }}" class="btn btn-outline-primary">Buat Tiket Baru</a>
                                 </div>
                             </div>

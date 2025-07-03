@@ -6,7 +6,7 @@
         <div class="overlay"></div>
         <div class="container">
             <div class="row min-vh-100 align-items-center justify-content-center">
-                <div class="col-lg-10">
+                <div class="col-lg-12">
                     <div class="welcome-content bg-white bg-opacity-90 p-5 rounded-3 shadow-lg text-center">
                         <!-- Logo -->
                         <div class="logo-container mb-4">
@@ -174,7 +174,7 @@
 
 <style>
 .hero-section {
-    background: linear-gradient(135deg, #1abc9c, #2ecc71);
+    background: linear-gradient(135deg, #1abc9c, #0d6efd);
     min-height: 100vh;
     position: relative;
 }
@@ -273,15 +273,15 @@
     box-shadow: 0 5px 15px rgba(0,0,0,0.1);
 }
 
-.text-primary { color: #2ecc71 !important; }
-.bg-primary { background-color: #2ecc71 !important; }
+.text-primary { color: #0d6efd !important; }
+.bg-primary { background-color: #0d6efd !important; }
 .btn-primary {
-    background-color: #2ecc71;
-    border-color: #2ecc71;
+    background-color: #0d6efd;
+    border-color: #0d6efd;
 }
 .btn-primary:hover {
-    background-color: #27ae60;
-    border-color: #27ae60;
+    background-color: #0d6efd;
+    border-color: #0d6efd;
 }
 
 .bg-success { background-color: #3498db !important; }
