@@ -18,8 +18,8 @@
                         <h1 class="display-4 fw-bold text-primary mb-3">Selamat Datang</h1>
                         <p class="lead text-dark mb-5">Sistem Informasi Pendaftaran, IT Support, dan Survei Kepuasan</p>
                         
-                        <div class="row g-4 justify-content-center mb-5">
-                            <div class="col-md-6">
+                        <!-- <div class="row g-4 justify-content-center mb-5">
+                            <div class="col-md-4">
                                 <div class="card h-100 border-0 shadow-sm hover-card">
                                     <div class="card-body text-center p-4">
                                         <div class="feature-icon-wrapper mb-3">
@@ -32,9 +32,9 @@
                                         <a href="{{ route('registrations.select-type') }}" class="btn btn-primary">Daftar Sekarang</a>
                                     </div>
                                 </div>
-                            </div>
+                            </div> -->
                             
-                            <!-- <div class="col-md-4">
+                            <div class="col-md-12">
                                 <div class="card h-100 border-0 shadow-sm hover-card">
                                     <div class="card-body text-center p-4">
                                         <div class="feature-icon-wrapper mb-3">
@@ -47,9 +47,9 @@
                                         <a href="{{ route('tickets.create') }}" class="btn btn-success">Buat Tiket</a>
                                     </div>
                                 </div>
-                            </div> -->
+                            </div>
                             
-                            <div class="col-md-6">
+                            <!-- <div class="col-md-4">
                                 <div class="card h-100 border-0 shadow-sm hover-card">
                                     <div class="card-body text-center p-4">
                                         <div class="feature-icon-wrapper mb-3">
@@ -63,7 +63,7 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </div> -->
 
                         <!-- Survey Results Section -->
                         <div class="survey-results mt-5 pt-5 border-top">

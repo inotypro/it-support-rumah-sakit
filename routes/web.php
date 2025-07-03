@@ -22,6 +22,7 @@ use App\Http\Controllers\HomeController;
 
 // Public Routes
 Route::get('/', [HomeController::class, 'index'])->name('welcome');
+Route::get('/it-tiket', [HomeController::class, 'ittiket'])->name('it-tiket');
 
 // Authentication Routes
 Route::middleware(['web'])->group(function () {
